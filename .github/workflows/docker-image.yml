@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - 'main'
-    tags:
-      - 'v*'
   pull_request:
     branches:
       - 'main'
@@ -31,6 +29,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/euphonium-builder:${GITHUB_REF##*/}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/euphonium-builder:latest
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/euphonium-builder:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/euphonium-builder:buildcache,mode=max
