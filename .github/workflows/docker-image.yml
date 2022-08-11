@@ -2,12 +2,13 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - 'main'
     tags:
-        - 'v*'
+      - 'v*'
   pull_request:
-    branches: [ "main" ]
-
+    branches:
+      - 'main'
 
 jobs:
 
@@ -30,6 +31,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/euphonium-builder:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/euphonium-builder:${GITHUB_REF##*/}
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/euphonium-builder:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/euphonium-builder:buildcache,mode=max
